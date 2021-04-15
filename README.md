@@ -22,7 +22,7 @@ pip install jamdict jamdict_data
 Copy database file `jamdict.db` into `jamdict_data` package folder before compiling with the following command
 
 ```bash
-python3 setup.py sdist
+python3 setup.py sdist --formats=xztar
 ```
 
 ## Dictionaries license
