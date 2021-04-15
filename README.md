@@ -1,6 +1,21 @@
-# jamdict_data
+# Jamdict database
 
-Precompiled database for jamdict library for manipulating Jim Breen's JMdict, KanjiDic2, KRADFILE and JMnedict
+A precompiled database that contains Jim Breen's JMdict, KanjiDic2, KRADFILE and JMnedict.
+
+This package is intended for using with [jamdict](https://pypi.org/project/jamdict/) package.
+For more information, please visit:
+
+- Jamdict documentation: https://jamdict.readthedocs.io/
+- Jamdict on PyPI: https://pypi.org/project/jamdict/
+- Jamdict source code: https://github.com/neocl/jamdict/
+
+## Installation
+
+jamdict_data is available on PyPI and can be installed with:
+
+```bash
+pip install jamdict jamdict_data
+```
 
 ## Dictionaries license
 
