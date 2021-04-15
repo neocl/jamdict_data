@@ -17,6 +17,14 @@ jamdict_data is available on PyPI and can be installed with:
 pip install jamdict jamdict_data
 ```
 
+## Development
+
+Copy database file `jamdict.db` into `jamdict_data` package folder before compiling with the following command
+
+```bash
+python3 setup.py sdist
+```
+
 ## Dictionaries license
 
 All dictionaries in this package are licensed under CC BY-SA 3.0.
