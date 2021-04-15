@@ -11,6 +11,7 @@ Latest version can be found at https://github.com/neocl/jamdict_data
 '''
 
 import os
+import sys
 import io
 import lzma
 from setuptools import setup
@@ -47,11 +48,21 @@ try:
             _unpack_db()
     _cmdclass['bdist_wheel'] = BuildDatabase
 except ImportError:
+    print()
+    print("-" * 80)
+    print(">>> INSTALL FAILED - BUT FIX IS AVAILABLE BELOW (mostly because of corrupted wheel) <<<")
+    print("jamdict_data relies on wheel to unpack data, please make sure that wheel is installed by running `pip install wheel`")
+    print("Some systems, like Ubuntu, is shipped with broken wheel in virtual environments! Hopefully this pain will go away soon.")
+    print("You may need to uninstall jamdict_data before reinstall it again: `pip uninstall jamdict_data`")
+    print("-" * 80)
+    print()
+    raise
     # wheel is not available ...
-    class BuildDatabase():
-        def run(self):
-            _unpack_db()
-    _cmdclass['bdist_wheel'] = BuildDatabase
+    ### class BuildDatabase(install):
+    ###     def run(self):
+    ###         super().run()
+    ###         _unpack_db()
+    ### _cmdclass['bdist_wheel'] = BuildDatabase
 
 
 def read(*filenames, **kwargs):
@@ -95,7 +106,7 @@ setup(
     include_package_data=True,
     platforms='any',
     test_suite='test',
-    # Reference: https://pypi.python.org/pypi?%3Aaction=list_classifiers
+    # Reference: https://pypi.opython.org/pypi?%3Aaction=list_classifiers
     classifiers=['Programming Language :: Python',
                  'Development Status :: 2 - Pre-Alpha',
                  'Natural Language :: Japanese',
