@@ -1,4 +1,4 @@
 include README.md
 include LICENSE
-include jamdict_data/jamdict.db
+include jamdict_data/jamdict.db.xz
 include jamdict_data/LICENSE.md

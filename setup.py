@@ -10,8 +10,45 @@ Latest version can be found at https://github.com/neocl/jamdict_data
 :license: MIT, see LICENSE for more details.
 '''
 
+import os
 import io
+import lzma
 from setuptools import setup
+from setuptools.command.install import install
+
+
+def _unpack_db():
+    # unpack database package after installed
+    ZIPPED_DB = os.path.abspath("jamdict_data/jamdict.db.xz")
+    TARGET_DB = os.path.abspath("jamdict_data/jamdict.db")
+    if os.path.isfile(ZIPPED_DB) and not os.path.isfile(TARGET_DB):
+        print(f"Unpacking database from {ZIPPED_DB} to {TARGET_DB}")
+        with lzma.open(ZIPPED_DB) as f:
+            db_content = f.read()
+            with open(TARGET_DB, "wb") as out:
+                out.write(db_content)
+            # delete the xz file
+            os.unlink("jamdict_data/jamdict.db.xz")
+
+
+class InstallUnpackDatabase(install):
+    def run(self):
+        super().run()
+        _unpack_db()
+
+
+_cmdclass = {'install': InstallUnpackDatabase}
+
+try:
+    from wheel.bdist_wheel import bdist_wheel as _bdist_wheel
+    class BuildDatabase(_bdist_wheel):
+        def finalize_options(self):
+            super().finalize_options()
+            _unpack_db()
+    _cmdclass['bdist_wheel'] = BuildDatabase
+except ImportError:
+    # wheel is not available ...
+    pass
 
 
 def read(*filenames, **kwargs):
@@ -40,6 +77,7 @@ setup(
         "Bug Tracker": "https://github.com/neocl/jamdict/issues",
         "Source Code": "https://github.com/neocl/jamdict/"
     },
+    cmdclass=_cmdclass,
     keywords="nlp",
     license=pkg_info['__license__'],
     author=pkg_info['__author__'],
