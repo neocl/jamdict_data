@@ -48,7 +48,10 @@ try:
     _cmdclass['bdist_wheel'] = BuildDatabase
 except ImportError:
     # wheel is not available ...
-    pass
+    class BuildDatabase():
+        def run(self):
+            _unpack_db()
+    _cmdclass['bdist_wheel'] = BuildDatabase
 
 
 def read(*filenames, **kwargs):
@@ -74,8 +77,8 @@ setup(
     version=pkg_info['__version__'],
     url=pkg_info['__url__'],
     project_urls={
-        "Bug Tracker": "https://github.com/neocl/jamdict/issues",
-        "Source Code": "https://github.com/neocl/jamdict/"
+        "Bug Tracker": "https://github.com/neocl/jamdict_data/issues",
+        "Source Code": "https://github.com/neocl/jamdict_data/"
     },
     cmdclass=_cmdclass,
     keywords="nlp",
