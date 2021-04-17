@@ -8,21 +8,30 @@ For more information, please visit:
 - Jamdict documentation: https://jamdict.readthedocs.io/
 - Jamdict on PyPI: https://pypi.org/project/jamdict/
 - Jamdict source code: https://github.com/neocl/jamdict/
+- Dictionary source files are available on: https://www.edrdg.org/wiki/
+
+Compiled date: 17 Apr 2021
 
 ## Installation
 
-jamdict_data is available on PyPI and can be installed with:
+`jamdict-data` is available on PyPI and can be installed with:
 
 ```bash
-pip install jamdict jamdict_data
+pip install jamdict-data
 ```
+
+The database is also available on Google Drive:
+
+https://drive.google.com/drive/u/1/folders/1z4zF9ImZlNeTZZplflvvnpZfJp3WVLPk
 
 ## Development
 
-Copy database file `jamdict.db` into `jamdict_data` package folder before compiling with the following command
+1. Compile Jamdict database file `jamdict.db` using jamdict library
+2. Compress the database using xz
+3. Copy `jamdict.db.xz` into `jamdict_data` package folder and run sdist command
 
 ```bash
-python3 setup.py sdist --formats=xztar
+python3 setup.py sdist
 ```
 
 ## Dictionaries license
