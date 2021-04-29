@@ -97,6 +97,7 @@ setup(
     author=pkg_info['__author__'],
     tests_require=[],
     install_requires=[],
+    setup_requires=['wheel'],
     author_email=pkg_info['__email__'],
     description=pkg_info['__description__'],
     long_description=long_description,
