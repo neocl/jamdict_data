@@ -28,8 +28,8 @@ def _unpack_db():
             db_content = f.read()
             with open(TARGET_DB, "wb") as out:
                 out.write(db_content)
-            # delete the xz file
-            os.unlink("jamdict_data/jamdict.db.xz")
+        # delete the xz file
+        os.unlink(ZIPPED_DB)
 
 
 class InstallUnpackDatabase(install):
